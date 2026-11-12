@@ -1,4 +1,4 @@
-# Казанцев Захар Лаб-2(ИТ-5,6) Лабораторная №4 (Вариант 4)
+<img width="602" height="144" alt="Снимок экрана 2026-11-12 в 14 44 41" src="https://github.com/user-attachments/assets/b54bad8c-200b-46c3-a4f8-5619fbada29a" /># Казанцев Захар Лаб-2(ИТ-5,6) Лабораторная №4 (Вариант 4)
 
 # Задание 1
 
@@ -20,7 +20,7 @@
 
 ### Тестирование
 
-*(Вставьте скриншот выполнения Задания 1)*
+<img width="636" height="374" alt="image" src="https://github.com/user-attachments/assets/9b502d7e-92ec-486b-b37c-d035ca9cfbc2" />
 
 # Задание 2
 
@@ -42,7 +42,7 @@
 
 ### Тестирование
 
-*(Вставьте скриншот выполнения Задания 2)*
+<img width="507" height="157" alt="Снимок экрана 2026-11-12 в 14 40 34" src="https://github.com/user-attachments/assets/c151be77-4726-4fe4-8e9f-885fa7d530d9" />
 
 # Задание 3
 
@@ -64,7 +64,13 @@
 
 ### Тестирование
 
-*(Вставьте скриншот выполнения Задания 3)*
+<img width="600" height="157" alt="Снимок экрана 2026-11-12 в 14 44 11" src="https://github.com/user-attachments/assets/0e57da94-2b44-4d51-9665-238db866337f" />
+<img width="603" height="142" alt="Снимок экрана 2026-11-12 в 14 44 28" src="https://github.com/user-attachments/assets/b73f144d-8848-4c28-bf39-bb90ea58c0fc" />
+<img width="600" height="142" alt="Снимок экрана 2026-11-12 в 14 44 54" src="https://github.com/user-attachments/assets/ac51e63f-2391-44a6-bb33-e0152e4e0da5" />
+<img width="674" height="121" alt="Снимок экрана 2026-11-12 в 14 45 18" src="https://github.com/user-attachments/assets/086ed792-8222-4ba6-96ed-e91ecfa73029" />
+
+
+
 
 # Задание 4
 
