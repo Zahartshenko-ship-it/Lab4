@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -67,10 +67,16 @@ namespace Lab4
 
         private static void RunTask1()
         {
-            Console.WriteLine(
-                "--- Задание 1. Вариант 4 ---");
+            Console.WriteLine("--- Задание 1. Вариант 4 (List<T>) ---");
 
-            List<int> list = ReadIntegerList();
+            List<string> list = ReadList<string>(
+                "Введите количество элементов в списке: ",
+                (string input, out string value) =>
+                {
+                    value = input;
+                    return !string.IsNullOrEmpty(input);
+                },
+                "Ошибка: элемент не должен быть пустым.");
 
             if (list.Count == 0)
             {
@@ -81,48 +87,50 @@ namespace Lab4
             Console.WriteLine("\nИсходный список:");
             PrintList(list);
 
-            int targetElement = ReadInteger(
-                "Введите значение элемента E: ");
+            Console.Write("Введите значение элемента E: ");
+            string targetElement = Console.ReadLine() ?? string.Empty;
 
-            ListTask.RemoveElementAfterTarget(
-                list, targetElement);
+            ListTask.RemoveElementAfterTarget(list, targetElement);
 
-            Console.WriteLine(
-                "\nРезультат после удаления элементов:");
+            Console.WriteLine("\nРезультат после удаления элементов:");
             PrintList(list);
         }
 
         private static void RunTask2()
         {
-            Console.WriteLine(
-                "--- Задание 2. Вариант 4 ---");
+            Console.WriteLine("--- Задание 2. Вариант 4 (List<T>) ---");
 
-            LinkedList<int> linkedList = ReadLinkedList();
+            List<string> list = ReadList<string>(
+                "Введите количество элементов в списке: ",
+                (string? input, out string value) =>
+                {
+                    value = input ?? string.Empty;
+                    return !string.IsNullOrEmpty(input);
+                },
+                "Ошибка: элемент не должен быть пустым.");
 
-            if (linkedList.Count == 0)
+            if (list.Count == 0)
             {
                 Console.WriteLine("Список пуст.");
                 return;
             }
 
-            Console.WriteLine("\nИсходный связный список:");
-            PrintLinkedList(linkedList);
+            Console.WriteLine("\nИсходный список:");
+            PrintList(list);
 
-            bool hasEqual = ListTask
-                .HasElementEqualToNextCircular(linkedList);
+            bool hasEqual = ListTask.HasElementEqualToNextCircular(list);
 
             Console.WriteLine();
-
             if (hasEqual)
             {
                 Console.WriteLine(
-                    "Результат: В списке ЕСТЬ элемент, " +
+                    "Результат: В списке ЕСТЬ элемент, "+
                     "равный следующему за ним (по кругу).");
             }
             else
             {
                 Console.WriteLine(
-                    "Результат: В списке НЕТ элементов, " +
+                    "Результат: В списке НЕТ элементов, "+
                     "равных следующим за ними (по кругу).");
             }
         }
@@ -511,6 +519,54 @@ namespace Lab4
             LinkedList<int> list)
         {
             foreach (int item in list)
+            {
+                Console.Write($"{item} ");
+            }
+            Console.WriteLine();
+        }
+
+        private delegate bool TryParseHandler<T>(string? input, out T result);
+
+        private static List<T> ReadList<T>(
+            string countPrompt,
+            TryParseHandler<T> parser,
+            string errorMessage)
+        {
+            List<T> resultList = new List<T>();
+
+            int count = ReadInteger(countPrompt);
+            while (count <= 0)
+            {
+                Console.WriteLine("Количество должно быть больше нуля.");
+                count = ReadInteger(countPrompt);
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                T element;
+                bool isValid;
+                do
+                {
+                    Console.Write($"Введите элемент {i + 1}: ");
+                    string? input = Console.ReadLine();
+                    isValid = parser(input, out element!);
+
+                    if (!isValid)
+                    {
+                        Console.WriteLine(errorMessage);
+                    }
+                }
+                while (!isValid);
+
+                resultList.Add(element);
+            }
+
+            return resultList;
+        }
+
+        private static void PrintList<T>(List<T> list)
+        {
+            foreach (T item in list)
             {
                 Console.Write($"{item} ");
             }
