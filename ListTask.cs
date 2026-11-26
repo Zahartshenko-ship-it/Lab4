@@ -6,32 +6,34 @@ namespace Lab4
     {
         private static int _processedCount;
 
-        public static void RemoveElementAfterTarget(
-            List<int> list, int targetElement)
+        public static void RemoveElementAfterTarget<T>(
+            List<T> list, T targetElement)
         {
+            if (list == null || list.Count == 0)
+            {
+                return;
+            }
+
             _processedCount = 0;
-            int nextIndex = 0;
 
             for (int i = 0; i < list.Count; i++)
             {
-                if (list[i] == targetElement)
+                if (EqualityComparer<T>.Default.Equals(list[i], targetElement))
                 {
-                    nextIndex = i + 1;
+                    int nextIndex = i + 1;
 
-                    if (nextIndex < list.Count)
+                    if (nextIndex < list.Count &&
+                        !EqualityComparer<T>.Default.Equals(list[nextIndex], targetElement))
                     {
-                        if (list[nextIndex] != targetElement)
-                        {
-                            list.RemoveAt(nextIndex);
-                            _processedCount++;
-                        }
+                        list.RemoveAt(nextIndex);
+                        _processedCount++;
                     }
                 }
             }
         }
 
-        public static bool HasElementEqualToNextCircular(
-            LinkedList<int> list)
+        public static bool HasElementEqualToNextCircular<T>(
+            List<T> list)
         {
             if (list == null || list.Count == 0)
             {
@@ -40,29 +42,15 @@ namespace Lab4
 
             _processedCount = 0;
 
-            LinkedListNode<int>? currentNode = list.First;
-
-            while (currentNode != null)
+            for (int i = 0; i < list.Count; i++)
             {
-                LinkedListNode<int>? nextNode;
-
-                if (currentNode.Next != null)
-                {
-                    nextNode = currentNode.Next;
-                }
-                else
-                {
-                    nextNode = list.First;
-                }
-
+                int nextIndex = (i + 1) % list.Count;
                 _processedCount++;
 
-                if (currentNode.Value == nextNode!.Value)
+                if (EqualityComparer<T>.Default.Equals(list[i], list[nextIndex]))
                 {
                     return true;
                 }
-
-                currentNode = currentNode.Next;
             }
 
             return false;
